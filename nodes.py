@@ -130,12 +130,16 @@ fp16 uses much less VRAM, but in some cases can lead to loss of quality.
                 os.path.join(script_directory,"checkpoints","Marigold_v1_merged",),
                 os.path.join(script_directory,"checkpoints","Marigold",),
                 os.path.join(diffusers_model_path,"Marigold_v1_merged"),
-                os.path.join(diffusers_model_path,"Marigold")
+                os.path.join(diffusers_model_path,"Marigold"),
+                os.path.join("/stable-diffusion-cache/models/diffusers","Marigold_v1_merged"),
+                os.path.join("/stable-diffusion-cache/models/diffusers","Marigold"),
             ]
         elif model == "marigold-lcm-v1-0":
             folders_to_check = [
                 os.path.join(diffusers_model_path,"marigold-lcm-v1-0"),
-                os.path.join(diffusers_model_path,"checkpoints","marigold-lcm-v1-0")
+                os.path.join(diffusers_model_path,"checkpoints","marigold-lcm-v1-0"),
+                os.path.join("/stable-diffusion-cache/models/diffusers","marigold-lcm-v1-0"),
+                os.path.join("/stable-diffusion-cache/models/diffusers","checkpoints","marigold-lcm-v1-0")
             ]
         self.custom_config = {
             "model": model,

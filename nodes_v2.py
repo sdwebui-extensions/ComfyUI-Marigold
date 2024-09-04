@@ -50,14 +50,17 @@ ComfyUI/models/diffusers -folder
         checkpoint_path = os.path.join(diffusers_model_path, model)
 
         if not os.path.exists(checkpoint_path):
-            print(f"Selected model: {checkpoint_path} not found, downloading...")
-            from huggingface_hub import snapshot_download
-            snapshot_download(repo_id=f"prs-eth/{model}", 
-                                allow_patterns=["*.json", "*.txt","*fp16*"],
-                                ignore_patterns=["*.bin"],
-                                local_dir=checkpoint_path, 
-                                local_dir_use_symlinks=False
-                                )
+            if os.path.exists("/stable-diffusion-cache/models/diffusers"):
+                checkpoint_path = os.path.join("/stable-diffusion-cache/models/diffusers", model)
+            else:
+                print(f"Selected model: {checkpoint_path} not found, downloading...")
+                from huggingface_hub import snapshot_download
+                snapshot_download(repo_id=f"prs-eth/{model}", 
+                                    allow_patterns=["*.json", "*.txt","*fp16*"],
+                                    ignore_patterns=["*.bin"],
+                                    local_dir=checkpoint_path, 
+                                    local_dir_use_symlinks=False
+                                    )
         if "normals" in model:
             modeltype = "normals"
             self.marigold_pipeline = MarigoldNormalsPipeline.from_pretrained(
